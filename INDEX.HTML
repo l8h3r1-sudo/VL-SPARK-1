@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VL SPARK | My Portfolio</title>
+
+<style>
+:root {
+  --pink: #ff69b4;
+  --light: #fff0f7;
+  --dark: #281321;
+  --card: #ffffff;
+  --text: #351c2b;
+  --muted: #906c80;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--light);
+  color: var(--text);
+  transition: .3s;
+}
+
+body.dark {
+  --light: #1c101a;
+  --card: #301d2b;
+  --text: #fff0f7;
+  --muted: #d3a9c1;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--card);
+  padding: 17px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 20px #ff69b422;
+}
+
+.logo {
+  color: var(--pink);
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+nav {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: var(--pink);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font: inherit;
+}
+
+.theme {
+  background: var(--pink);
+  color: white;
+  padding: 9px 13px;
+  border-radius: 20px;
+}
+
+.hero {
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 50px 20px;
+  background:
+    radial-gradient(circle at 20% 20%, #ffc0e0 0, transparent 35%),
+    radial-gradient(circle at 80% 70%, #f9c5ff 0, transparent 35%),
+    var(--light);
+}
+
+.hero h1 {
+  font-size: clamp(45px, 9vw, 90px);
+  color: var(--pink);
+  font-weight: 900;
+}
+
+.hero h2 {
+  font-size: clamp(22px, 4vw, 35px);
+  margin: 12px;
+}
+
+.hero p {
+  max-width: 600px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.typing {
+  color: var(--pink);
+  font-weight: bold;
+  min-height: 30px;
+  margin: 12px;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--pink);
+  color: white;
+  padding: 13px 27px;
+  border-radius: 30px;
+  margin: 15px 7px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 6px 20px #ff69b455;
+  transition: .3s;
+}
+
+.btn:hover {
+  transform: translateY(-5px);
+}
+
+section {
+  padding: 80px 8%;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 35px;
+  margin-bottom: 40px;
+  color: var(--pink);
+}
+
+.about-box {
+  max-width: 850px;
+  margin: auto;
+  padding: 35px;
+  border-radius: 25px;
+  background: var(--card);
+  box-shadow: 0 10px 35px #ff69b422;
+  text-align: center;
+  line-height: 2;
+}
+
+.skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+.skill {
+  padding: 25px;
+  background: var(--card);
+  border-radius: 18px;
+  box-shadow: 0 5px 20px #ff69b422;
+}
+
+.skill h3 {
+  margin-bottom: 15px;
+}
+
+.bar {
+  background: #f6d5e6;
+  height: 11px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #ff69b4, #c56cff);
+  border-radius: 20px;
+  transition: width 1.5s;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.filter {
+  padding: 10px 20px;
+  border-radius: 25px;
+  background: var(--card);
+  color: var(--text);
+}
+
+.filter.active {
+  background: var(--pink);
+  color: white;
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 25px;
+}
+
+.project {
+  background: var(--card);
+  padding: 28px;
+  border-radius: 22px;
+  box-shadow: 0 8px 25px #ff69b422;
+  transition: .3s;
+}
+
+.project:hover {
+  transform: translateY(-8px);
+}
+
+.project .emoji {
+  font-size: 45px;
+}
+
+.project h3 {
+  margin: 15px 0;
+  color: var(--pink);
+}
+
+.project p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.project button {
+  margin-top: 18px;
+  background: var(--pink);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 20px;
+}
+
+.contact-box {
+  max-width: 650px;
+  margin: auto;
+  background: var(--card);
+  padding: 35px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 8px 25px #ff69b422;
+}
+
+.contact-box input,
+.contact-box textarea {
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  border: 2px solid #ffc0df;
+  border-radius: 12px;
+  background: var(--light);
+  color: var(--text);
+  font: inherit;
+}
+
+.contact-box textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.contact-box button {
+  background: var(--pink);
+  color: white;
+  padding: 13px 25px;
+  border-radius: 25px;
+}
+
+footer {
+  background: #ed75b5;
+  color: white;
+  text-align: center;
+  padding: 25px;
+}
+
+#top {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: var(--pink);
+  color: white;
+  padding: 14px 18px;
+  border-radius: 50%;
+  display: none;
+  z-index: 90;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: .7s;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media(max-width: 700px) {
+  header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 13px;
+  }
+
+  nav a {
+    font-size: 13px;
+  }
+
+  section {
+    padding: 60px 6%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">VL SPARK ✨</div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <button class="theme" id="themeBtn">🌙</button>
+</header>
+
+<!-- HOME -->
+<section class="hero" id="home">
+  <h2>WELCOME TO MY WORLD</h2>
+  <h1>VL SPARK ✨</h1>
+  <div class="typing" id="typing"></div>
+
+  <p>
+    Hello! Welcome to my creative portfolio.
+    Explore my skills, creativity, projects and ideas.
+    This is where imagination meets innovation!
+  </p>
+
+  <div>
+    <a href="#about" class="btn">Explore More</a>
+    <a href="#contact" class="btn">Contact Me</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="reveal">
+  <h2 class="section-title">ABOUT ME 💗</h2>
+
+  <div class="about-box">
+    <h2>Hi! I'm VL SPARK 🌸</h2>
+    <p>
+      I am a creative learner who loves technology,
+      web design, creativity and exploring new ideas.
+      I enjoy building beautiful digital experiences
+      and learning new things every day.
+    </p>
+    <p>
+      My goal is to turn my imagination into reality
+      through creativity and technology.
+    </p>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="reveal">
+  <h2 class="section-title">MY SKILLS 🎀</h2>
+
+  <div class="skills">
+    <div class="skill">
+      <h3>🌐 HTML</h3>
+      <div class="bar"><div class="fill" data-width="90%"></div></div>
+    </div>
+
+    <div class="skill">
+      <h3>🎨 CSS</h3>
+      <div class="bar"><div class="fill" data-width="80%"></div></div>
+    </div>
+
+    <div class="skill">
+      <h3>⚡ JavaScript</h3>
+      <div class="bar"><div class="fill" data-width="70%"></div></div>
+    </div>
+
+    <div class="skill">
+      <h3>💡 Creativity</h3>
+      <div class="bar"><div class="fill" data-width="95%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="reveal">
+  <h2 class="section-title">MY PROJECTS 🚀</h2>
+
+  <div class="filters">
+    <button class="filter active" data-filter="all">All</button>
+    <button class="filter" data-filter="design">Design</button>
+    <button class="filter" data-filter="web">Web</button>
+    <button class="filter" data-filter="creative">Creative</button>
+  </div>
+
+  <div class="projects">
+
+    <div class="project" data-category="web">
+      <div class="emoji">💻</div>
+      <h3>My First Website</h3>
+      <p>A creative website made with HTML, CSS and JavaScript.</p>
+      <button onclick="showProject('My First Website')">Explore</button>
+    </div>
+
+    <div class="project" data-category="design">
+      <div class="emoji">🎨</div>
+      <h3>Creative Designs</h3>
+      <p>Beautiful designs, layouts and visual ideas.</p>
+      <button onclick="showProject('Creative Designs')">Explore</button>
+    </div>
+
+    <div class="project" data-category="creative">
+      <div class="emoji">💡</div>
+      <h3>My Ideas</h3>
+      <p>A collection of creative ideas and imagination.</p>
+      <button onclick="showProject('My Ideas')">Explore</button>
+    </div>
+
+    <div class="project" data-category="web">
+      <div class="emoji">🌸</div>
+      <h3>Pink Portfolio</h3>
+      <p>A personal portfolio with a beautiful pink theme.</p>
+      <button onclick="showProject('Pink Portfolio')">Explore</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="reveal">
+  <h2 class="section-title">LET'S CONNECT 💌</h2>
+
+  <div class="contact-box">
+    <h2>Send Me a Message!</h2>
+    <p>Have an idea? Let's connect.</p>
+
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" placeholder="Write your message..." required></textarea>
+      <button type="submit">Send Message ✨</button>
+    </form>
+
+    <p id="status" style="margin-top:15px;"></p>
+    <button type="button" onclick="copyEmail()" style="margin-top:15px;">
+      Copy My Email
+    </button>
+  </div>
+</section>
+
+<footer>
+  <h2>VL SPARK ✨</h2>
+  <p>Designed with 💗 and creativity.</p>
+  <p>© <span id="year"></span> VL SPARK. All rights reserved.</p>
+</footer>
+
+<button id="top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Typing animation
+const words = [
+  "Creative Thinker ✨",
+  "Future Developer 💻",
+  "Dream Big 🌸",
+  "Keep Creating 💗"
+];
+
+let wordIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+function typeEffect() {
+  const current = words[wordIndex];
+  document.getElementById("typing").textContent =
+    current.substring(0, charIndex);
+
+  if (!deleting) {
+    charIndex++;
+    if (charIndex > current.length) {
+      deleting = true;
+      setTimeout(typeEffect, 1000);
+      return;
+    }
+  } else {
+    charIndex--;
+    if (charIndex < 0) {
+      deleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      charIndex = 0;
+    }
+  }
+
+  setTimeout(typeEffect, deleting ? 45 : 90);
+}
+typeEffect();
+
+// Dark mode
+const themeBtn = document.getElementById("themeBtn");
+
+themeBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  themeBtn.textContent =
+    document.body.classList.contains("dark") ? "☀️" : "🌙";
+});
+
+// Project filters
+const filterButtons = document.querySelectorAll(".filter");
+const projects = document.querySelectorAll(".project");
+
+filterButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    filterButtons.forEach(b => b.classList.remove("active"));
+    button.classList.add("active");
+
+    const filter = button.dataset.filter;
+
+    projects.forEach(project => {
+      project.style.display =
+        filter === "all" || project.dataset.category === filter
+        ? "block" : "none";
+    });
+  });
+});
+
+// Project popup
+function showProject(name) {
+  alert("Welcome to " + name + "! ✨\nMore project details coming soon.");
+}
+
+// Copy email
+function copyEmail() {
+  const email = "yourname@example.com";
+
+  navigator.clipboard.writeText(email)
+    .then(() => alert("Email address copied!"))
+    .catch(() => alert("Please copy: " + email));
+}
+
+// Contact form
+document.getElementById("contactForm")
+.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message").value;
+
+  const subject = encodeURIComponent("Portfolio message from " + name);
+  const body = encodeURIComponent(
+    "Name: " + name +
+    "\nEmail: " + email +
+    "\nMessage: " + message
+  );
+
+  document.getElementById("status").textContent =
+    "Opening your email application...";
+
+  window.location.href =
+    "mailto:yourname@example.com?subject=" +
+    subject + "&body=" + body;
+});
+
+// Scroll reveal and skill bars
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+
+      entry.target.querySelectorAll(".fill").forEach(bar => {
+        bar.style.width = bar.dataset.width;
+      });
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll(".reveal").forEach(el => {
+  observer.observe(el);
+});
+
+// Back to top
+window.addEventListener("scroll", () => {
+  document.getElementById("top").style.display =
+    window.scrollY > 400 ? "block" : "none";
+});
+
+// Current year
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+</script>
+
+</body>
+</html>
